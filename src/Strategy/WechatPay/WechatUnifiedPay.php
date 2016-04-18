@@ -1,26 +1,14 @@
 <?php
 namespace Eshow\Service\Pay\Platform;
 
-use Omnipay\Omnipay;
-
-use Eshow\Service\Pay\PaymentContext;
-use Eshow\Service\Pay\PaymentStrategy;
-
-class WechatJsPay extends WechatPay{
+class WechatUnifiedPay extends WechatPay{
 	public function __construct($body = null){
-		$this->tradeType = 'JSAPI';
-		
 		parent::__construct($body);
-	}
 
-	protected function initGateWay(){
-		parent::initGateway();
+		$this->platform = 'wechat_unified_pay';
+		$this->tradeType = 'NATIVE';
 
-		$this->gateway->setOpenId($this->body->openid);
-	}
-
-	public function before(){
-
+		array_push($this->keys, 'product_id');
 	}
 
 	/**
@@ -32,13 +20,12 @@ class WechatJsPay extends WechatPay{
 	 */
 	public function doing(){
 		parent::doing();
-
-		$this->result = $this->result->createWebPaymentPackage();
+		
+		$this->result = $this->result->getCodeUrl();
 	}
 
 	public function after(){
-		
+
 	}
 }
-	
 ?>

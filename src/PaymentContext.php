@@ -1,22 +1,7 @@
 <?php
-namespace Eshow\Service\Pay;
+namespace ChengFang\EasyPay;
 
 class PaymentContext{
-	public static $PAY_PLATFORM = [
-		'wechat' => '1',
-		'alipay' => '2',
-		'direct' => '3',
-	];
-
-	const WECHAT_PAY = '1';
-	const ALIPAY = '2';
-	const DIRECT_PAY = '3';
-
-	public static $PAY_PLATFORM_ALIAS = [
-		self::WECHAT_PAY => '微信支付',
-		self::ALIPAY => '支付宝支付',
-		self::DIRECT_PAY => '平台内支付（未使用第三方支付）',
-	];
 
 	private $strategy;
 
@@ -36,6 +21,10 @@ class PaymentContext{
 
 	public function getStrategy(){
 		return $this->strategy;
+	}
+
+	public function getResult(){
+		return $this->strategy->getResult();
 	}
 }
 ?>

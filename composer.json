@@ -11,6 +11,11 @@
 		"ccob/omnipay-alipay": "dev-master",
 		"omnipay/common": "~2.0"
 	},
+	"autoload": {
+	    "psr-4": {
+	    	"ChengFang\\EasyPay\\": "src/"
+	    }
+	},
 	"authors": [
 	    {
 	      "name": "hjiash",
