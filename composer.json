@@ -1,0 +1,20 @@
+{
+	"name": "EasyPay",
+	"description": "an integration for third party payment",
+	"keywords": ["php", "EasyPay", "third party payment"],
+	"license": "MIT",
+	"type": "library",
+	"homepage": "https://github.com/hjiash/EasyPay",
+	"require": {
+		"guzzlehttp/guzzle": "~6.0",
+		"ccob/omnipay-wechatpay": "0.1.2",
+		"ccob/omnipay-alipay": "dev-master",
+		"omnipay/common": "~2.0"
+	},
+	"authors": [
+	    {
+	      "name": "hjiash",
+	      "email": "hjs@zerioi.com"
+	    }
+    ]
+}
