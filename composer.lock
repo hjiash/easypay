@@ -4,106 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6c70108650c54f0f661e5657073b074b",
-    "content-hash": "8e03301c9df99e7f11c561a2e9e34ede",
+    "hash": "2f810ae0ec0a7302763a98ea794f62fb",
+    "content-hash": "4bdde2ca7bba5b7741ad096056d4c30d",
     "packages": [
-        {
-            "name": "ccob/omnipay-alipay",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Ccob-x/omnipay-alipay.git",
-                "reference": "e31e69b046af605e3700d7167b1cf6472bf3338e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Ccob-x/omnipay-alipay/zipball/e31e69b046af605e3700d7167b1cf6472bf3338e",
-                "reference": "e31e69b046af605e3700d7167b1cf6472bf3338e",
-                "shasum": ""
-            },
-            "require": {
-                "omnipay/common": "~2.0"
-            },
-            "require-dev": {
-                "omnipay/tests": "~2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Omnipay\\Alipay\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ccob",
-                    "email": "yuan.sysu@gmail.com"
-                }
-            ],
-            "description": "Alipay gateway for Omnipay payment processing library",
-            "homepage": "https://github.com/Ccob-x/omnipay-alipay",
-            "keywords": [
-                "alipay",
-                "gateway",
-                "merchant",
-                "omnipay",
-                "pay",
-                "payment",
-                "purchase"
-            ],
-            "time": "2016-01-19 08:34:06"
-        },
-        {
-            "name": "ccob/omnipay-wechatpay",
-            "version": "v0.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Ccob-x/omnipay-wechatpay.git",
-                "reference": "9c1678a65362d5a07290e92567fdd648667478b7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Ccob-x/omnipay-wechatpay/zipball/9c1678a65362d5a07290e92567fdd648667478b7",
-                "reference": "9c1678a65362d5a07290e92567fdd648667478b7",
-                "shasum": ""
-            },
-            "require": {
-                "omnipay/common": "~2.0",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Omnipay\\WechatPay\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Cobb",
-                    "email": "yuan.sysu@gmail.com"
-                }
-            ],
-            "description": "Wechatpay gateway for Omnipay payment processing library",
-            "homepage": "https://github.com/Ccob-x/omnipay-wechatpay",
-            "keywords": [
-                "gateway",
-                "merchant",
-                "omnipay",
-                "pay",
-                "payment",
-                "purchase",
-                "wechat",
-                "wechatpay"
-            ],
-            "time": "2015-11-24 08:12:44"
-        },
         {
             "name": "guzzle/guzzle",
             "version": "v3.9.3",
@@ -849,9 +752,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "ccob/omnipay-alipay": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
