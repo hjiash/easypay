@@ -13,4 +13,3 @@ class AlipayWapExpress extends AbstractAlipay{
 	public function after(){}
 
 }
-?>
