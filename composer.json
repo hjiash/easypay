@@ -1,5 +1,5 @@
 {
-	"name": "EasyPay",
+	"name": "chengfang/easypay",
 	"description": "an integration for third party payment",
 	"keywords": ["php", "EasyPay", "third party payment"],
 	"license": "MIT",
