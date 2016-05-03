@@ -1,21 +1,26 @@
 <?php
 namespace ChengFang\EasyPay;
 
+use ChengFang\EasyPay\Strategy\AbstractPayStrategy;
+
 class PaymentContext{
 
 	private $strategy;
 
-	public function __construct(PaymentStrategy $strategy = null){
-		if(!is_null($strategy)){
-			$this->strategy = $strategy;
-		}
+	public function __construct($stragety){
+		$class = __NAMESPACE__.'\\'.$stragety;
+
+		$this->strategy = new $class();
 	}
 
 	public function execute(){
-		$this->strategy->execute();
+		$args = func_get_args();
+
+		call_user_func_array([$this->strategy, 'execute'], $args);
+		//$this->strategy->execute($args);
 	}
 
-	public function setStrategy(PaymentStrategy $strategy){
+	public function setStrategy(AbstractPayStrategy $strategy){
 		$this->strategy = $strategy;
 	}
 
@@ -25,6 +30,14 @@ class PaymentContext{
 
 	public function getResult(){
 		return $this->strategy->getResult();
+	}
+
+	public function getKeys(){
+		return $this->stragety->getKeys();
+	}
+
+	public function getPlatform(){
+		return $this->stragety->getPlatform();
 	}
 }
 ?>

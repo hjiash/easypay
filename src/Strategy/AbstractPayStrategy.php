@@ -4,42 +4,25 @@ namespace ChengFang\EasyPay\Strategy;
 use ChengFang\EasyPay\Exception\InvalidParamsException;
 
 abstract class AbstractPayStrategy{
-	protected $body;
-
 	protected $platform;
 	protected $gateway;
 	protected $gatewayName;
 	protected $keys;
 	protected $result;
 
-	public function __construct($body = null){
-		if(!is_null($body)){
-			$this->body = $body;
-		}
-	}
-
-	public function before(){
-		$this->validateBody();	
-	}
-	abstract protected function initGateway();
+	abstract public function before();
 	abstract public function doing();
 	abstract public function after();
 
 	public function execute(){
-		$this->before();
+		// $this->before($args);
+		// $this->doing($args);
+		// $this->after();
+		$args = func_get_args();
 
-		$this->initGateway();
-
-		$this->doing();
-		$this->after();
-	}
-
-	public function setBody($body){
-		$this->body = $body;
-	}
-
-	public function getBody(){
-		return $this->body;
+		call_user_func_array([$this, 'before'], $args);
+		call_user_func_array([$this, 'doing'], $args);
+		call_user_func_array([$this, 'after'], []);
 	}
 
 	public function getResult(){
@@ -52,18 +35,6 @@ abstract class AbstractPayStrategy{
 
 	public function getKeys(){
 		return $this->keys;
-	}
-
-	protected function validateBody(){
-		if(empty($this->body) || !is_array($this->body)){
-			throw new InvalidParamsException;
-		}
-
-		foreach($this->keys as $key){
-			if(!array_key_exists($key, $this->body)){
-				throw new InvalidParamsException;
-			}
-		}
 	}
 }
 ?>

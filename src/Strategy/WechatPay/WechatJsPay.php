@@ -1,20 +1,15 @@
 <?php
-namespace Eshow\Service\Pay\Platform;
+namespace ChengFang\EasyPay\Strategy\WechatPay;
 
 class WechatJsPay extends AbstractWechatPay{
 
-	public function __construct($body = null){
-		parent::__construct($body);
+	public function __construct(){
+		parent::__construct();
 
 		$this->platform = 'wechat_js_pay';
 		$this->tradeType = 'JSAPI';
 
 		array_push($this->keys, 'openid');
-	}
-
-	protected function initGateWay(){
-		parent::initGateway();
-		$this->gateway->setOpenId($this->body['openid']);
 	}
 
 	/**
@@ -25,13 +20,13 @@ class WechatJsPay extends AbstractWechatPay{
 	 * @return [type] [description]
 	 */
 	public function doing(){
-		parent::doing();
+		$args = func_get_arg(0);
+
+		$this->gateway->setOpenId($args['openid']);
+
+		parent::doing($args);
 
 		$this->result = $this->result->createWebPaymentPackage();
-	}
-
-	public function after(){
-		
 	}
 }
 	

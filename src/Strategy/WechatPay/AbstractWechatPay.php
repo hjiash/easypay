@@ -1,6 +1,9 @@
 <?php
 namespace ChengFang\EasyPay\Strategy\WechatPay;
 
+use ChengFang\EasyPay\Exception\InvalidParamsException;
+use ChengFang\EasyPay\Exception\WechatPayException;
+
 use Omnipay\Omnipay;
 use ChengFang\EasyPay\Configuration;
 use ChengFang\EasyPay\Strategy\AbstractPayStrategy;
@@ -8,19 +11,39 @@ use ChengFang\EasyPay\Strategy\AbstractPayStrategy;
 abstract class AbstractWechatPay extends AbstractPayStrategy{
 	protected $tradeType;
 
-	public function __construct($body = null){
-		parent::__construct($body);
-		
+	public function __construct(){
 		$this->platform = 'wechat';
 		$this->gatewayName = 'WechatPay';
 		$this->keys = [
 			'body', 'detail', 'out_trade_no',
 			'total_fee', 'spbill_create_ip', 'notify_url'
 		];
+
+		$this->gateway = Omnipay::create( $this->gatewayName );
 	}
 
-	protected function initGateWay(){
-		$this->gateway = Omnipay::create( $this->gatewayName );
+	public function before(){
+		$args = func_get_args();
+
+		if(count($args) != 1 || !is_array($args[0])){
+			throw new InvalidParamsException;
+		}
+
+		foreach ($this->keys as $key) {
+			if(!array_key_exists($key, $args[0])){
+				throw new InvalidParamsException;
+			}
+		}
+	}
+
+	/**
+	 * [doing description]
+	 * @throws WechatPayException
+	 * @return [type] [description]
+	 */
+	public function doing(){
+
+		$args = func_get_arg(0);
 
 		$this->gateway->setTradeType( $this->tradeType );
 
@@ -28,36 +51,25 @@ abstract class AbstractWechatPay extends AbstractPayStrategy{
 		$this->gateway->setMchId( Configuration::get('wechat.mchid') );
 		$this->gateway->setKey( Configuration::get('wechat.pay_key') );
 
-		//$this->gateway->setProductId( $this->body->productId );
-		$this->gateway->setBody( $this->body['body'] );
-		$this->gateway->setDetail( $this->body['detail'] );
-		$this->gateway->setOutTradeNo( $this->body['out_trade_no'] );
-		$this->gateway->setTotalFee( round($this->body['total_fee']) );
-		$this->gateway->setNotifyUrl( $this->body['notify_url'] );
+		$this->gateway->setBody( $args['body'] );
+		$this->gateway->setDetail( $args['detail'] );
+		$this->gateway->setOutTradeNo( $args['out_trade_no'] );
+		$this->gateway->setTotalFee( round($args['total_fee']) );
+		$this->gateway->setNotifyUrl( $args['notify_url'] );
 
-		$this->gateway->setSpbillCreateIP( Request::ip() );
-	}
+		$this->gateway->setSpbillCreateIP( $args['spbill_create_ip'] );
 
-	public function before(){
-		$this->validateBody();
-	}
 
-	/**
-	 * [doing description]
-	 * @throws WechatPayRequestFailException
-	 * @return [type] [description]
-	 */
-	public function doing(){
 		$response = $this->gateway->createUnifiedOrder()->send();
 
 		if( !$response->isResponseSuccessful() ){
-			throw new \WechatPayRequestFailException( $response->getReturnMsg() );
+			throw new WechatPayException( $response->getReturnMsg() );
 		}
 		if( !$response->isSignatureMatched() ){
-			throw new \WechatPayRequestFailException( '签名校验失败，可能为非法响应' );
+			throw new WechatPayException( '签名校验失败，可能为非法响应' );
 		}
 		if( !$response->isResultSuccessful() ){
-			throw new \WechatPayRequestFailException( $response->getErrCodeDes() );
+			throw new WechatPayException( $response->getErrCodeDes() );
 		}
 
 		$this->result = $response;

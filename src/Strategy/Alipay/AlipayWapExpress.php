@@ -1,6 +1,8 @@
 <?php
 namespace ChengFang\EasyPay\Strategy\Alipay;
 
+use Omnipay\Omnipay;
+
 class AlipayWapExpress extends AbstractAlipay{
 	
 	public function __construct($body = null){
@@ -8,8 +10,7 @@ class AlipayWapExpress extends AbstractAlipay{
 
 		$this->platform = 'alipay_wap_express';
 		$this->gatewayName = 'Alipay_WapExpress';
+
+		$this->gateway = Omnipay::create( $this->gatewayName );
 	}
-
-	public function after(){}
-
 }

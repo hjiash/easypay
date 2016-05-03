@@ -1,9 +1,9 @@
 <?php
-namespace Eshow\Service\Pay\Platform;
+namespace ChengFang\EasyPay\Strategy\WechatPay;
 
-class WechatUnifiedPay extends WechatPay{
-	public function __construct($body = null){
-		parent::__construct($body);
+class WechatUnifiedPay extends AbstractWechatPay{
+	public function __construct(){
+		parent::__construct();
 
 		$this->platform = 'wechat_unified_pay';
 		$this->tradeType = 'NATIVE';
@@ -19,13 +19,13 @@ class WechatUnifiedPay extends WechatPay{
 	 * @return [type] [description]
 	 */
 	public function doing(){
-		parent::doing();
+		$args = func_get_arg(0);
+
+		$this->gateway->setProductId($args['product_id']);
+		parent::doing($args);
 		
 		$this->result = $this->result->getCodeUrl();
 	}
 
-	public function after(){
-
-	}
 }
 ?>
