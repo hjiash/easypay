@@ -1,7 +1,7 @@
 <?php
 namespace ChengFang\EasyPay;
 
-use ChengFang\EasyPay\ConfigurationException;
+use ChengFang\EasyPay\Exception\ConfigurationException;
 
 class Configuration{
 
@@ -18,8 +18,8 @@ class Configuration{
 	];
 
 	public static function get($key, $default = null){
-		if(array_key_exists($key, $_config) && !empty($_config[$key])){
-			return $_config[$key];
+		if(array_key_exists($key, static::$_config) && !empty(static::$_config[$key])){
+			return static::$_config[$key];
 		}else if(!is_null($default)){
 			return $default;
 		}else{
