@@ -70,16 +70,8 @@ class WechatRedPack extends AbstractPayStrategy{
 			'ssl_key_path' => Configuration::get('wechat.ssl_key_path')
 		])->send();
 
-		echo json_encode([
-			$response->getRealSign(),
-			$response->getSign()
-		]);exit;
-
 		if( !$response->isResponseSuccessful() ){
 			throw new WechatPayException( $response->getReturnMsg() );
-		}
-		if( !$response->isSignatureMatched() ){
-			throw new WechatPayException( '签名校验失败，可能为非法响应' );
 		}
 		if( !$response->isResultSuccessful() ){
 			throw new WechatPayException( $response->getErrCodeDes() );
