@@ -29,7 +29,7 @@ abstract class BaseAbstractResponse extends AbstractResponse{
     }
 
     public function getRealSign(){
-        return $this->getParamsSignature( $this->getData(), $request->getKey() );
+        return $this->getParamsSignature( $this->getData(), $this->request->getKey() );
     }
 
     public function getParameter( $key ){
