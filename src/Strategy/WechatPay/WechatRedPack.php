@@ -70,9 +70,9 @@ class WechatRedPack extends AbstractPayStrategy{
 			'ssl_key_path' => Configuration::get('wechat.ssl_key_path')
 		])->send();
 
-		$sign = $response->getParamsSignature( $this->getData(), $request->getKey() );
 		echo json_encode([
-			$sign, $this->getSign()
+			$response->getRealSign(),
+			$response->getSign()
 		]);exit;
 
 		if( !$response->isResponseSuccessful() ){

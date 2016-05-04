@@ -28,6 +28,10 @@ abstract class BaseAbstractResponse extends AbstractResponse{
         $this->is_successful = $this->is_signature_matched & $this->is_response_successful & $this->is_result_successful;
     }
 
+    public function getRealSign(){
+        return $this->getParamsSignature( $this->getData(), $request->getKey() );
+    }
+
     public function getParameter( $key ){
 
         return array_key_exists( $key, $this->data ) ? $this->data[$key] : null;
