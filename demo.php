@@ -74,6 +74,12 @@ $redPack = [
 ];
 $context = new PaymentContext('Strategy\WechatPay\WechatRedPack');
 $context->execute($redPack);
+/**
+ * result是RedPackResponse的对象
+ * 可以根据微信支付文档，将参数转化成驼峰的形式获取返回值
+ */
+$result = $context->getResult();
+echo $result->getSendListid();
 exit;
 
 /**
