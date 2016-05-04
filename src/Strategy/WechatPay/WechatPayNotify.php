@@ -6,19 +6,21 @@ use ChengFang\EasyPay\Configuration;
 use ChengFang\EasyPay\Strategy\AbstractPayStrategy;
 
 use Exception;
+use ChengFang\EasyPay\Exception\InvalidParamsException;
 use ChengFang\EasyPay\Exception\WechatPayException;
 
 class WechatPayNotify extends AbstractPayStrategy{
-	public function __construct($body = null){
-		parent::__construct($body);
-
+	public function __construct(){
 		$this->platform = 'wechat';
 		$this->gatewayName = 'WechatPay';
+
+		$this->gateway = Omnipay::create( $this->gatewayName );
 	}
 
-	protected function initGateway(){
-		$this->gateway = Omnipay::create( $this->gatewayName );
-		$this->gateway->setKey( Configuration::get('wechat.pay_key') );
+	public function before(){
+		if(func_num_args() != 1){
+			throw new InvalidParamsException;
+		}
 	}
 
 	/**
@@ -27,8 +29,12 @@ class WechatPayNotify extends AbstractPayStrategy{
 	 * @return [type] [description]
 	 */
 	public function doing(){
+		$body = func_get_arg(0);
+
 		try{
-			$response = $this->gateway->completeOrder( $this->body )->send();
+			$this->gateway->setKey( Configuration::get('wechat.pay_key') );
+
+			$response = $this->gateway->completeOrder( $body )->send();
 
 			if( !$response->isResponseSuccessful() ){
 				throw new WechatPayException('通信失败');
@@ -49,12 +55,6 @@ class WechatPayNotify extends AbstractPayStrategy{
 
 	public function after(){
 
-	}
-
-	protected function validateBody(){
-		if(empty($this->body) || !is_array($this->body)){
-			throw new InvalidParamsException;
-		}
 	}
 }
 ?>

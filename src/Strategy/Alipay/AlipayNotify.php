@@ -6,23 +6,23 @@ use ChengFang\EasyPay\Configuration;
 use ChengFang\EasyPay\Strategy\AbstractPayStrategy;
 
 use Exception;
+use ChengFang\EasyPay\Exception\InvalidParamsException;
 use ChengFang\EasyPay\Exception\AlipayException;
 
 
 class AlipayNotify extends AbstractPayStrategy{
 
-	public function __construct($body = null){
-		parent::__construct($body);
-
+	public function __construct(){
 		$this->platform = 'alipay';
 		$this->gatewayName = 'Alipay_Express';
+
+		$this->gateway = Omnipay::create( $this->gatewayName );
 	}
 
-	protected function initGateway(){
-		$this->gateway = Omnipay::create( $this->gatewayName );
-        $this->gateway->setPartner( Configuration::get( 'alipay.id' ) );
-        $this->gateway->setKey( Configuration::get( 'alipay.key' ) );
-        $this->gateway->setSellerEmail( Configuration::get( 'alipay.email' ) );
+	public function before(){
+		if(func_num_args() != 1){
+			throw new InvalidParamsException;
+		}
 	}
 
 	/**
@@ -32,10 +32,15 @@ class AlipayNotify extends AbstractPayStrategy{
 	 * @return [type] [description]
 	 */
 	public function doing(){
-		
+		$body = func_get_arg(0);
+
 		try{
+			$this->gateway->setPartner( Configuration::get( 'alipay.id' ) );
+        	$this->gateway->setKey( Configuration::get( 'alipay.key' ) );
+        	$this->gateway->setSellerEmail( Configuration::get( 'alipay.email' ) );
+
 			$response = $this->gateway->completePurchase([
-	            'request_params' => $this->body,
+	            'request_params' => $body,
 	        ])->send();
 
 	        if(!$response->isSuccessful()){
@@ -54,12 +59,6 @@ class AlipayNotify extends AbstractPayStrategy{
 
 	public function after(){
 
-	}
-
-	protected function validateBody(){
-		if(empty($this->body) || !is_array($this->body)){
-			throw new InvalidParamsException;
-		}
 	}
 }
 ?>
