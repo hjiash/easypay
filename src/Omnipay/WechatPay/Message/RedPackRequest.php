@@ -72,7 +72,7 @@ class RedPackRequest extends BaseAbstractRequest{
 
         $result = parent::sendData( $data, $curl_options );
 
-        return $result;
+        return $this->response = new RedPackResponse($this, $result);
     }
 
     public function setMchBillno($value = null){
