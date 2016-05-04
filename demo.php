@@ -7,7 +7,7 @@ use ChengFang\EasyPay\PaymentContext;
 date_default_timezone_set('UTC');
 
 function createOrderNumber(){
-	$orderNumber = date('YmdHis').substr(microtime(), 2, 6);
+	$orderNumber = date('YmdHis').substr(microtime(), 2, 4);
 	return $orderNumber;
 }
 
@@ -40,6 +40,7 @@ function getClientIp() {
 // $context = new PaymentContext('Strategy\WechatPay\WechatUnifiedPay');
 // $context->execute($order);
 // echo $context->getResult();
+// exit;
 
 /**
  * 微信公众号内支付
@@ -57,6 +58,23 @@ function getClientIp() {
 // $context = new PaymentContext('Strategy\WechatPay\WechatJsPay');
 // $context->execute($order);
 // echo $context->getResult();
+
+/**
+ * 微信红包
+ */
+$redPack = [
+    'send_name' => '广州乘方',
+    're_openid' => 'o6FwguKysTyj3zlikp8U8DwHk4XA',
+    'total_amount' => 100,
+    'total_num' => 1,
+    'wishing' => '祝福语',
+    'client_ip' => getClientIp(),
+    'act_name' => '活动名称',
+    'remark' => '备注'
+];
+$context = new PaymentContext('Strategy\WechatPay\WechatRedPack');
+$context->execute($redPack);
+exit;
 
 /**
  * 支付宝PC即时到账

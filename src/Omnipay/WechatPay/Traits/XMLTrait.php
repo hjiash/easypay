@@ -11,7 +11,6 @@ trait XMLTrait{
      * @return  string
      */
     protected function convertArrayToXml( $target ){
-
         $xml = "<xml>";
         
         foreach ( $target as $key => $val ){

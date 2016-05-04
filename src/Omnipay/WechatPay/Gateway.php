@@ -223,7 +223,15 @@ class Gateway extends AbstractGateway {
 
         return $this->getParameter( 'openid' );
     }
-    
+
+    /**
+     * 发送微信红包
+     */
+    public function redPack( $parameters = array() ){
+
+        return $this->createRequest('\Omnipay\WechatPay\Message\RedPackRequest', $parameters);
+
+    } 
     /**
      * 统一下单请求
      * 
