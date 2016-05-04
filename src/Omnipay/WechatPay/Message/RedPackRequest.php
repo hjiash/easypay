@@ -72,6 +72,8 @@ class RedPackRequest extends BaseAbstractRequest{
 
         $result = parent::sendData( $data, $curl_options );
 
+        echo json_encode($result);exit;
+
         return $this->response = new RedPackResponse($this, $result);
     }
 
