@@ -11,9 +11,9 @@ $request->setOutTradeNo();
 以下是demo
 
 /**
- * 微信扫码支付
- * @var [type]
- */
+微信扫码支付
+@var [type]
+*/
 $order = [
 	'body' => '商品描述',
 	'detail' => '商品详情',
@@ -29,9 +29,9 @@ $result = $context->getResult();
 $result->getCodeUrl();
 
 /**
- * 微信公众号内支付
- * @var [type]
- */
+微信公众号内支付
+@var [type]
+*/
 $order = [
 	'body' => '商品描述',
 	'detail' => '商品详情',
@@ -47,9 +47,9 @@ $result = $context->getResult();
 $result->createWebPaymentPackage();
 
 /**
- * 微信APP支付
- * @var [type]
- */
+微信APP支付
+@var [type]
+*/
 $order = [
  'body' => '商品描述',
  'detail' => '商品详情',
@@ -64,8 +64,8 @@ $context->execute($order);
 $result = $context->getResult();
 
 /**
- * 微信支付结果回调
- */
+微信支付结果回调
+*/
 $body = file_get_contents('php://input');
 $context = new PaymentContext('Strategy\WechatPay\WechatPayNotify');
 $context->execute($body);
@@ -73,9 +73,9 @@ $context->execute($body);
 try{
     $result = $context->getResult();
     /**
-     * result是CompleteOrderResponse的对象
-     * 可以根据微信支付文档，将参数转化成驼峰的形式获取返回值
-     */
+    result是CompleteOrderResponse的对象
+    可以根据微信支付文档，将参数转化成驼峰的形式获取返回值
+    */
     
     // $result->getTransactionId();
     // $result->getOutTradeNo();
@@ -88,8 +88,8 @@ try{
 }
 
 /**
- * 微信红包
- */
+微信红包
+*/
 $redPack = [
     'send_name' => '广州乘方',
     're_openid' => 'o6FwguKysTyj3zlikp8U8DwHk4XA',
@@ -106,9 +106,9 @@ $result = $context->getResult();
 echo $result->getSendListid();
 
 /**
- * 支付宝PC即时到账
- * @var [type]
- */
+支付宝PC即时到账
+@var [type]
+*/
 $order = [
 	'subject' => '商品描述',
 	'body' => '商品详情',
@@ -122,9 +122,9 @@ $context->execute($order);
 echo $context->getResult()->getRedirectUrl();
 
 /**
- * 支付宝手机即时到账
- * @var [type]
- */
+支付宝手机即时到账
+@var [type]
+*/
 $order = [
 	'subject' => '商品描述',
 	'body' => '商品详情',
@@ -139,8 +139,8 @@ echo $context->getResult()->getRedirectUrl();
 
 
 /**
- * 支付宝支付结果回调
- */
+支付宝支付结果回调
+*/
 $body = Input::get();
 $context = new PaymentContext('Strategy\WechatPay\WechatPayNotify');
 $context->execute($body);
