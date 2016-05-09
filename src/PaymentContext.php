@@ -17,7 +17,6 @@ class PaymentContext{
 		$args = func_get_args();
 
 		call_user_func_array([$this->strategy, 'execute'], $args);
-		//$this->strategy->execute($args);
 	}
 
 	public function setStrategy(AbstractPayStrategy $strategy){
@@ -38,6 +37,14 @@ class PaymentContext{
 
 	public function getPlatform(){
 		return $this->stragety->getPlatform();
+	}
+
+	public function success(){
+		return $this->strategy->success();
+	}
+
+	public function fail(){
+		return $this->strategy->fail();
 	}
 }
 ?>

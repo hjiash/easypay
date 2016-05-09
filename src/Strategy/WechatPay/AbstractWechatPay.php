@@ -34,6 +34,10 @@ abstract class AbstractWechatPay extends AbstractPayStrategy{
 				throw new InvalidParamsException;
 			}
 		}
+
+		$this->gateway->setAppId( Configuration::get('wechat.appid') );
+		$this->gateway->setMchId( Configuration::get('wechat.mchid') );
+		$this->gateway->setKey( Configuration::get('wechat.pay_key') );
 	}
 
 	/**
@@ -46,19 +50,12 @@ abstract class AbstractWechatPay extends AbstractPayStrategy{
 		$args = func_get_arg(0);
 
 		$this->gateway->setTradeType( $this->tradeType );
-
-		$this->gateway->setAppId( Configuration::get('wechat.appid') );
-		$this->gateway->setMchId( Configuration::get('wechat.mchid') );
-		$this->gateway->setKey( Configuration::get('wechat.pay_key') );
-
 		$this->gateway->setBody( $args['body'] );
 		$this->gateway->setDetail( $args['detail'] );
 		$this->gateway->setOutTradeNo( $args['out_trade_no'] );
 		$this->gateway->setTotalFee( round($args['total_fee']) );
 		$this->gateway->setNotifyUrl( $args['notify_url'] );
-
 		$this->gateway->setSpbillCreateIP( $args['spbill_create_ip'] );
-
 
 		$response = $this->gateway->createUnifiedOrder()->send();
 

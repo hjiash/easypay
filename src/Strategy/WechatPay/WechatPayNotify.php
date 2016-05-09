@@ -10,6 +10,8 @@ use ChengFang\EasyPay\Exception\InvalidParamsException;
 use ChengFang\EasyPay\Exception\WechatPayException;
 
 class WechatPayNotify extends AbstractPayStrategy{
+	use \Omnipay\WechatPay\Traits\XMLTrait;
+
 	public function __construct(){
 		$this->platform = 'wechat';
 		$this->gatewayName = 'WechatPay';
@@ -21,6 +23,8 @@ class WechatPayNotify extends AbstractPayStrategy{
 		if(func_num_args() != 1){
 			throw new InvalidParamsException;
 		}
+
+		$this->gateway->setKey( Configuration::get('wechat.pay_key') );
 	}
 
 	/**
@@ -32,8 +36,6 @@ class WechatPayNotify extends AbstractPayStrategy{
 		$body = func_get_arg(0);
 
 		try{
-			$this->gateway->setKey( Configuration::get('wechat.pay_key') );
-
 			$response = $this->gateway->completeOrder( $body )->send();
 
 			if( !$response->isResponseSuccessful() ){
@@ -55,6 +57,26 @@ class WechatPayNotify extends AbstractPayStrategy{
 
 	public function after(){
 
+	}
+
+	public function success($message = null){
+		return $this->createResponse(true, $message);
+	}
+
+	public function fail($message = null){
+		return $this->createResponse(false, $message);
+	}
+
+	protected function createResponse($success = true, $message = null){
+		$returnCode = $success? 'SUCCESS' : 'FAIL';
+		$return = [
+			'return_code' => $returnCode,
+		];
+		if(!is_null($message)){
+			$return['return_msg'] = $message;
+		}
+
+		return $this->convertArrayToXml($return);
 	}
 }
 ?>

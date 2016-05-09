@@ -26,7 +26,7 @@ class WechatJsPay extends AbstractWechatPay{
 
 		parent::doing($args);
 
-		$this->result = $this->result->createWebPaymentPackage();
+		// $this->result = $this->result->createWebPaymentPackage();
 	}
 }
 	

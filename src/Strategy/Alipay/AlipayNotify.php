@@ -60,5 +60,17 @@ class AlipayNotify extends AbstractPayStrategy{
 	public function after(){
 
 	}
+
+	public function success(){
+		return $this->createResponse(true);
+	}
+
+	public function fail(){
+		return $this->createResponse(false);
+	}
+
+	protected function createResponse($success = true){
+		return $success? 'success' : 'fail';
+	}
 }
 ?>

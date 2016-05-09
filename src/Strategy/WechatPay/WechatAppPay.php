@@ -1,14 +1,19 @@
 <?php
 namespace ChengFang\EasyPay\Strategy\WechatPay;
 
-class WechatUnifiedPay extends AbstractWechatPay{
+class WechatAppPay extends AbstractWechatPay{
+
 	public function __construct(){
 		parent::__construct();
 
-		$this->platform = 'wechat_unified_pay';
-		$this->tradeType = 'NATIVE';
+		$this->platform = 'wechat_js_pay';
+		$this->tradeType = 'APP';
+	}
 
-		array_push($this->keys, 'product_id');
+	public function before(){
+		parent::before();
+
+		$this->gateway->setAppId(Configuration::get('wechat.app.appid'));
 	}
 
 	/**
@@ -21,11 +26,10 @@ class WechatUnifiedPay extends AbstractWechatPay{
 	public function doing(){
 		$args = func_get_arg(0);
 
-		$this->gateway->setProductId($args['product_id']);
-		parent::doing($args);
-		
-		// $this->result = $this->result->getCodeUrl();
-	}
+		$this->gateway->setOpenId($args['openid']);
 
+		parent::doing($args);
+	}
 }
+	
 ?>

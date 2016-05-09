@@ -39,8 +39,8 @@ function getClientIp() {
 // ];
 // $context = new PaymentContext('Strategy\WechatPay\WechatUnifiedPay');
 // $context->execute($order);
-// echo $context->getResult();
-// exit;
+// $result = $context->getResult();
+// $result->getCodeUrl();
 
 /**
  * 微信公众号内支付
@@ -57,7 +57,50 @@ function getClientIp() {
 // ];
 // $context = new PaymentContext('Strategy\WechatPay\WechatJsPay');
 // $context->execute($order);
-// echo $context->getResult();
+// $result = $context->getResult();
+// $result->createWebPaymentPackage();
+
+/**
+ * 微信APP支付
+ * @var [type]
+ */
+// $order = [
+//  'body' => '商品描述',
+//  'detail' => '商品详情',
+//  'out_trade_no' => createOrderNumber(),
+//  'total_fee' => 1,
+//  'spbill_create_ip' => getClientIp(),
+//  'notify_url' => 'http://test.com',
+//  'openid' => 'openid'
+// ];
+// $context = new PaymentContext('Strategy\WechatPay\WechatJsPay');
+// $context->execute($order);
+// $result = $context->getResult();
+
+
+/**
+ * 微信支付结果回调
+ */
+$body = file_get_contents('php://input');
+$context = new PaymentContext('Strategy\WechatPay\WechatPayNotify');
+$context->execute($body);
+
+try{
+    $result = $context->getResult();
+    /**
+     * result是CompleteOrderResponse的对象
+     * 可以根据微信支付文档，将参数转化成驼峰的形式获取返回值
+     */
+    
+    // $result->getTransactionId();
+    // $result->getOutTradeNo();
+    
+    // $result->success($message = null);
+    $result->success('信息可以不需要');
+}catch(Exception $e){
+    // $result->fail($message = null);
+    $result->fail('信息可以不需要');
+}
 
 /**
  * 微信红包
@@ -105,3 +148,25 @@ $order = [
 $context = new PaymentContext('Strategy\Alipay\AlipayWapExpress');
 $context->execute($order);
 echo $context->getResult();
+
+/**
+ * 支付宝支付结果回调
+ */
+$body = Input::get();
+$context = new PaymentContext('Strategy\WechatPay\WechatPayNotify');
+$context->execute($body);
+
+try{
+    $result = $context->getResult();
+    /**
+     * result是CompleteOrderResponse的对象
+     * 可以根据微信支付文档，将参数转化成驼峰的形式获取返回值
+     */
+    
+    // $result->getRequest()->getParameter('trade_no');
+    // $result->getRequest()->getParameter('out_trade_no');
+        
+    $result->success();
+}catch(Exception $e){
+    $result->fail();
+}
