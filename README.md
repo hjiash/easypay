@@ -1,19 +1,25 @@
+### 1. 说明
+
 使用前，请进入src/目录下，复制Configuration.php.example并重命名为Configuration.php，配置好参数。
 
+
 所有属性值支持以下方式进行set/get:
-	$this->setParameter('key', $value);
-	$this->getParameter('key');
+```php
+$this->setParameter('key', $value);
+$this->getParameter('key');
+```
 
 另外，微信支付支持将参数名转换成大驼峰，前面加get/set的方法名获取，如 
+```php
 $request->getOutTradeNo();
 $request->setOutTradeNo();
+```
 
-以下是demo
+### 以下是demo
 
-/**
-微信扫码支付
-@var [type]
-*/
+> 微信扫码支付
+
+```php
 $order = [
 	'body' => '商品描述',
 	'detail' => '商品详情',
@@ -27,11 +33,11 @@ $context = new PaymentContext('Strategy\WechatPay\WechatUnifiedPay');
 $context->execute($order);
 $result = $context->getResult();
 $result->getCodeUrl();
+```
 
-/**
-微信公众号内支付
-@var [type]
-*/
+> 微信公众号内支付
+
+```php
 $order = [
 	'body' => '商品描述',
 	'detail' => '商品详情',
@@ -45,6 +51,7 @@ $context = new PaymentContext('Strategy\WechatPay\WechatJsPay');
 $context->execute($order);
 $result = $context->getResult();
 $result->createWebPaymentPackage();
+```
 
 /**
 微信APP支付
