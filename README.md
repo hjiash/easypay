@@ -1,6 +1,6 @@
 使用前，请进入src/目录下，复制Configuration.php.example并重命名为Configuration.php，配置好参数
 
-所有参数支持以下方式进行set/get:
+所有属性值支持以下方式进行set/get:
 $this->setParameter('key', $value);
 $this->getParameter('key');
 
