@@ -1,7 +1,9 @@
-使用前，请进入src/目录下，复制Configuration.php.example并重命名为Configuration.php，配置好参数
+>使用前，请进入src/目录下，复制Configuration.php.example并重命名为Configuration.php，配置好参数。
 
 所有属性值支持以下方式进行set/get:
+
 $this->setParameter('key', $value);
+
 $this->getParameter('key');
 
 另外，微信支付支持将参数名转换成大驼峰，前面加get/set的方法名获取，如 
