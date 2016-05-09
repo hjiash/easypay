@@ -80,8 +80,8 @@ $context->execute($body);
 try{
     $result = $context->getResult();
     /**
-    result是CompleteOrderResponse的对象
-    可以根据微信支付文档，将参数转化成驼峰的形式获取返回值
+     * result是CompleteOrderResponse的对象
+     * 可以根据微信支付文档，将参数转化成驼峰的形式获取返回值
     */
     
     // $result->getTransactionId();
