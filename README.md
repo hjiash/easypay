@@ -53,10 +53,9 @@ $result = $context->getResult();
 $result->createWebPaymentPackage();
 ```
 
-/**
-微信APP支付
-@var [type]
-*/
+> 微信APP支付
+
+```php
 $order = [
  'body' => '商品描述',
  'detail' => '商品详情',
@@ -69,10 +68,11 @@ $order = [
 $context = new PaymentContext('Strategy\WechatPay\WechatAppPay');
 $context->execute($order);
 $result = $context->getResult();
+```
 
-/**
-微信支付结果回调
-*/
+> 微信支付结果回调
+
+```php
 $body = file_get_contents('php://input');
 $context = new PaymentContext('Strategy\WechatPay\WechatPayNotify');
 $context->execute($body);
@@ -93,10 +93,11 @@ try{
     // $result->fail($message = null);
     $result->fail('信息可以不需要');
 }
+```
 
-/**
-微信红包
-*/
+> 微信红包
+
+```php
 $redPack = [
     'send_name' => '广州乘方',
     're_openid' => 'o6FwguKysTyj3zlikp8U8DwHk4XA',
@@ -111,11 +112,11 @@ $context = new PaymentContext('Strategy\WechatPay\WechatRedPack');
 $context->execute($redPack);
 $result = $context->getResult();
 echo $result->getSendListid();
+```
 
-/**
-支付宝PC即时到账
-@var [type]
-*/
+> 支付宝PC即时到账
+
+```php
 $order = [
 	'subject' => '商品描述',
 	'body' => '商品详情',
@@ -127,11 +128,11 @@ $order = [
 $context = new PaymentContext('Strategy\Alipay\AlipayPcExpress');
 $context->execute($order);
 echo $context->getResult()->getRedirectUrl();
+```
 
-/**
-支付宝手机即时到账
-@var [type]
-*/
+> 支付宝手机即时到账
+
+```php
 $order = [
 	'subject' => '商品描述',
 	'body' => '商品详情',
@@ -143,11 +144,12 @@ $order = [
 $context = new PaymentContext('Strategy\Alipay\AlipayWapExpress');
 $context->execute($order);
 echo $context->getResult()->getRedirectUrl();
+```
 
 
-/**
-支付宝支付结果回调
-*/
+> 支付宝支付结果回调
+
+```php
 $body = Input::get();
 $context = new PaymentContext('Strategy\WechatPay\WechatPayNotify');
 $context->execute($body);
@@ -162,3 +164,4 @@ try{
 }catch(Exception $e){
     $result->fail();
 }
+```
