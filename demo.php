@@ -167,8 +167,8 @@ try{
      * 可以根据微信支付文档，将参数转化成驼峰的形式获取返回值
      */
     
-    // $result->getRequest()->getParameter('trade_no');
-    // $result->getRequest()->getParameter('out_trade_no');
+    // $result->getRequest()->getRequestParams('trade_no');
+    // $result->getRequest()->getRequestParams('out_trade_no');
         
     self::success();
 }catch(Exception $e){
