@@ -73,6 +73,8 @@ $result = $context->getResult();
 > 微信支付结果回调
 
 ```php
+use \ChengFang\EasyPay\Traits\WechatPayNotify;
+
 $body = file_get_contents('php://input');
 $context = new PaymentContext('Strategy\WechatPay\WechatPayNotify');
 $context->execute($body);
@@ -150,6 +152,8 @@ echo $context->getResult()->getRedirectUrl();
 > 支付宝支付结果回调
 
 ```php
+use \ChengFang\EasyPay\Traits\AlipayNotify;
+
 $body = Input::get();
 $context = new PaymentContext('Strategy\WechatPay\WechatPayNotify');
 $context->execute($body);
