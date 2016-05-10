@@ -28,37 +28,37 @@ function getClientIp() {
  * 微信扫码支付
  * @var [type]
  */
-// $order = [
-// 	'body' => '商品描述',
-// 	'detail' => '商品详情',
-// 	'out_trade_no' => createOrderNumber(),
-// 	'product_id' => 1,
-// 	'total_fee' => 1,
-// 	'spbill_create_ip' => getClientIp(),
-// 	'notify_url' => 'http://test.com',
-// ];
-// $context = new PaymentContext('Strategy\WechatPay\WechatUnifiedPay');
-// $context->execute($order);
-// $result = $context->getResult();
-// $result->getCodeUrl();
+$order = [
+	'body' => '商品描述',
+	'detail' => '商品详情',
+	'out_trade_no' => createOrderNumber(),
+	'product_id' => 1,
+	'total_fee' => 1,
+	'spbill_create_ip' => getClientIp(),
+	'notify_url' => 'http://test.com',
+];
+$context = new PaymentContext('Strategy\WechatPay\WechatUnifiedPay');
+$context->execute($order);
+$result = $context->getResult();
+$result->getCodeUrl();
 
 /**
  * 微信公众号内支付
  * @var [type]
  */
-// $order = [
-// 	'body' => '商品描述',
-// 	'detail' => '商品详情',
-// 	'out_trade_no' => createOrderNumber(),
-// 	'total_fee' => 1,
-// 	'spbill_create_ip' => getClientIp(),
-// 	'notify_url' => 'http://test.com',
-// 	'openid' => 'openid'
-// ];
-// $context = new PaymentContext('Strategy\WechatPay\WechatJsPay');
-// $context->execute($order);
-// $result = $context->getResult();
-// $result->createWebPaymentPackage();
+$order = [
+	'body' => '商品描述',
+	'detail' => '商品详情',
+	'out_trade_no' => createOrderNumber(),
+	'total_fee' => 1,
+	'spbill_create_ip' => getClientIp(),
+	'notify_url' => 'http://test.com',
+	'openid' => 'openid'
+];
+$context = new PaymentContext('Strategy\WechatPay\WechatJsPay');
+$context->execute($order);
+$result = $context->getResult();
+$result->createWebPaymentPackage();
 
 /**
  * 微信APP支付
@@ -73,7 +73,7 @@ function getClientIp() {
 //  'notify_url' => 'http://test.com',
 //  'openid' => 'openid'
 // ];
-// $context = new PaymentContext('Strategy\WechatPay\WechatJsPay');
+// $context = new PaymentContext('Strategy\WechatPay\WechatAppPay');
 // $context->execute($order);
 // $result = $context->getResult();
 
@@ -81,6 +81,8 @@ function getClientIp() {
 /**
  * 微信支付结果回调
  */
+use \ChengFang\EasyPay\Traits\WechatPayNotify;
+
 $body = file_get_contents('php://input');
 $context = new PaymentContext('Strategy\WechatPay\WechatPayNotify');
 $context->execute($body);
@@ -95,11 +97,11 @@ try{
     // $result->getTransactionId();
     // $result->getOutTradeNo();
     
-    // $result->success($message = null);
-    $result->success('信息可以不需要');
+    // self::success($message = null);
+    self::success('信息可以不需要');
 }catch(Exception $e){
-    // $result->fail($message = null);
-    $result->fail('信息可以不需要');
+    // self::fail($message = null);
+    self::fail('信息可以不需要');
 }
 
 /**
@@ -152,6 +154,8 @@ echo $context->getResult();
 /**
  * 支付宝支付结果回调
  */
+use \ChengFang\EasyPay\Traits\AlipayNotify;
+
 $body = Input::get();
 $context = new PaymentContext('Strategy\WechatPay\WechatPayNotify');
 $context->execute($body);
@@ -166,7 +170,7 @@ try{
     // $result->getRequest()->getParameter('trade_no');
     // $result->getRequest()->getParameter('out_trade_no');
         
-    $result->success();
+    self::success();
 }catch(Exception $e){
-    $result->fail();
+    self::fail();
 }

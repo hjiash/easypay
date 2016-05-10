@@ -40,6 +40,8 @@ class PaymentContext{
 	}
 
 	public function success(){
+		$message = func_get_arg(0);
+
 		return $this->strategy->success();
 	}
 
