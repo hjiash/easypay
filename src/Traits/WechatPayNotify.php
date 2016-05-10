@@ -5,15 +5,15 @@ namespace ChengFang\EasyPay\Traits;
 trait WechatPayNotify{
     use \Omnipay\WechatPay\Traits\XMLTrait;
 
-    public static function success($message = null){
+    public function success($message = null){
         return self::createResponse(true, $message);
     }
 
-    public static function fail($message = null){
+    public function fail($message = null){
         return self::createResponse(false, $message);
     }
 
-    protected static function createResponse($success = true, $message = null){
+    protected function createResponse($success = true, $message = null){
         $returnCode = $success? 'SUCCESS' : 'FAIL';
         $return = [
             'return_code' => $returnCode,
