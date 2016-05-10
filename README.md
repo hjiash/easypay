@@ -87,11 +87,11 @@ try{
     // $result->getTransactionId();
     // $result->getOutTradeNo();
     
-    // $result->success($message = null);
-    $result->success('信息可以不需要');
+    // self::success($message = null);
+    self::success('信息可以不需要');
 }catch(Exception $e){
-    // $result->fail($message = null);
-    $result->fail('信息可以不需要');
+    // self::fail($message = null);
+    self::fail('信息可以不需要');
 }
 ```
 
@@ -160,8 +160,8 @@ try{
     // $result->getRequest()->getParameter('trade_no');
     // $result->getRequest()->getParameter('out_trade_no');
         
-    $result->success();
+    self::success();
 }catch(Exception $e){
-    $result->fail();
+    self::fail();
 }
 ```
