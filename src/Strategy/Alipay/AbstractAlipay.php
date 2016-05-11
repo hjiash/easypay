@@ -49,9 +49,7 @@ abstract class AbstractAlipay extends AbstractPayStrategy{
             'body'			=> $args['body']
         ])->send();
 
-		echo json_encode($response->getRedirectUrl());exit;
-
-		// $this->result = $response->getRedirectUrl();
+		$this->result = $response;
 	}
 
 	public function after(){
