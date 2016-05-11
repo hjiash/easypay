@@ -143,6 +143,7 @@ $context = new PaymentContext('Strategy\Alipay\AlipayPcExpress');
 $context->execute($order);
 $result = $context->getResult();
 echo $result->getRedirectUrl();
+exit;
 
 /**
  * 支付宝手机即时到账
