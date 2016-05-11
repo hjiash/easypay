@@ -132,12 +132,12 @@ function getClientIp() {
  * @var [type]
  */
 $order = [
+    'notify_url' => 'http://baidu.com',
+    'return_url' => 'http://baidu.com',
 	'subject' => '商品描述',
 	'body' => '商品详情',
 	'out_trade_no' => createOrderNumber(),
-	'total_fee' => 0.01,
-	'notify_url' => 'http://baidu.com',
-	'return_url' => ''
+	'total_fee' => 0.01
 ];
 $context = new PaymentContext('Strategy\Alipay\AlipayPcExpress');
 $context->execute($order);

@@ -15,12 +15,12 @@ class ExpressPurchaseRequest extends BasePurchaseRequest
     {
         $this->validateData();
         $data              = array(
+            "notify_url"        => $this->getNotifyUrl(),
             "service"           => $this->getService(),
             "partner"           => $this->getPartner(),
             "payment_type"      => $this->getPaymentType(),
-            "notify_url"        => $this->getNotifyUrl(),
-            "return_url"        => $this->getReturnUrl(),
             "seller_email"      => $this->getSellerEmail(),
+            "return_url"        => $this->getReturnUrl(),
             "out_trade_no"      => $this->getOutTradeNo(),
             "subject"           => $this->getSubject(),
             "total_fee"         => $this->getTotalFee(),

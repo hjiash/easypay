@@ -41,12 +41,12 @@ abstract class AbstractAlipay extends AbstractPayStrategy{
 
 		$response = $this->gateway->purchase([
             'payment_type'  => '1',
-            'notify_url'	=> $args['notify_url'],
-            'return_url'	=> $args['return_url'],
             'out_trade_no'  => $args['out_trade_no'],
             'total_fee'     => $args['total_fee'],
             'subject'       => $args['subject'],
-            'body'			=> $args['body']
+            'body'			=> $args['body'],
+            'notify_url'	=> $args['notify_url'],
+            'return_url'	=> $args['return_url']
         ])->send();
 
 		$this->result = $response;
