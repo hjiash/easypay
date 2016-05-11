@@ -37,12 +37,12 @@ abstract class AbstractAlipay extends AbstractPayStrategy{
         $this->gateway->setKey( Configuration::get( 'alipay.key' ) );
         $this->gateway->setSellerEmail( Configuration::get( 'alipay.email' ) );
         $this->gateway->setSellerId( Configuration::get( 'alipay.id' ) );
-        $this->gateway->setNotifyUrl( $args['notify_url'] );
-        $this->gateway->setReturnUrl( $args['return_url'] );
         $this->gateway->setSignType( 'MD5' );
 
 		$response = $this->gateway->purchase([
             'payment_type'  => '1',
+            'notify_url'	=> $args['notify_url'],
+            'return_url'	=> $args['return_url'],
             'out_trade_no'  => $args['out_trade_no'],
             'total_fee'     => $args['total_fee'],
             'subject'       => $args['subject'],
