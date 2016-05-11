@@ -139,19 +139,20 @@ $order = [
 	'notify_url' => 'http://baidu.com',
 	'return_url' => ''
 ];
-// $context = new PaymentContext('Strategy\Alipay\AlipayPcExpress');
-// $context->execute($order);
-// echo $context->getResult();
+$context = new PaymentContext('Strategy\Alipay\AlipayPcExpress');
+$context->execute($order);
+$result = $context->getResult();
+echo $result->getRedirectUrl();
 
 /**
  * 支付宝手机即时到账
  * @var [type]
  */
-$context = new PaymentContext('Strategy\Alipay\AlipayWapExpress');
-$context->execute($order);
-$result = $context->getResult();
-echo $result->getRedirectUrl();
-exit;
+// $context = new PaymentContext('Strategy\Alipay\AlipayWapExpress');
+// $context->execute($order);
+// $result = $context->getResult();
+// echo $result->getRedirectUrl();
+// exit;
 
 /**
  * 支付宝支付结果回调
