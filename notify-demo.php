@@ -13,9 +13,9 @@ use ChengFang\EasyPay\PaymentContext;
 use \ChengFang\EasyPay\Traits\AlipayNotify;
 
 $log = new Logger('alipay');
-$log->pushHandler(new StreamHandler(__DIR__.'/logs/alipay.log', Logger::WARNING));
+$log->pushHandler(new StreamHandler('logs/alipay.log', Logger::INFO));
 
-$body = Input::get();
+$body = file_get_contents("php://input");
 $log->addInfo('body', ['body' => $body]);
 
 $context = new PaymentContext('Strategy\Alipay\AlipayNotify');
@@ -34,6 +34,6 @@ try{
         
     $this->success();
 }catch(Exception $e){
-    $log->addError('exception', ['message' => $e->getMessage(), 'code' => $e->getCode()]);
+    $log->addInfo('exception', ['message' => $e->getMessage(), 'code' => $e->getCode()]);
     $this->fail();
 }
