@@ -48,7 +48,6 @@ abstract class BaseAbstractRequest extends AbstractRequest
         return $sign;
     }
 
-
     public function getSignType()
     {
         return $this->getParameter('sign_type');

@@ -14,7 +14,10 @@ class Configuration{
 		
 		'alipay.id' 			=> '',
 		'alipay.key' 			=> '',
-		'alipay.email' 			=> ''
+		'alipay.email' 			=> '',
+		'alipay.private_key'	=> '',
+		'alipay.private_key'	=> '',
+		'alipay.ali_public_key' => ''
 	];
 
 	public static function get($key, $default = null){

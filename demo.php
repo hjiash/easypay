@@ -3,6 +3,7 @@
 require __DIR__.'/vendor/autoload.php';
 
 use ChengFang\EasyPay\PaymentContext;
+use ChengFang\EasyPay\Configuration;
 
 date_default_timezone_set('UTC');
 
@@ -131,18 +132,36 @@ function getClientIp() {
  * 支付宝PC即时到账
  * @var [type]
  */
+// $order = [
+//     'notify_url' => 'http://baidu.com',
+//     'return_url' => 'http://baidu.com',
+// 	'subject' => '商品描述',
+// 	'body' => '商品详情',
+// 	'out_trade_no' => createOrderNumber(),
+// 	'total_fee' => 0.01
+// ];
+// $context = new PaymentContext('Strategy\Alipay\AlipayPcExpress');
+// $context->execute($order);
+// $result = $context->getResult();
+// echo $result->getRedirectUrl();
+// exit;
+
+/**
+ * 支付宝移动支付
+ * @var [type]
+ */
 $order = [
-    'notify_url' => 'http://baidu.com',
-    'return_url' => 'http://baidu.com',
-	'subject' => '商品描述',
-	'body' => '商品详情',
-	'out_trade_no' => createOrderNumber(),
-	'total_fee' => 0.01
+    'notify_url' => 'http://www.zerioi.com',
+    'return_url' => 'http://www.zerioi.com',
+    'subject' => '商品描述',
+    'body' => '商品详情',
+    'out_trade_no' => createOrderNumber(),
+    'total_fee' => 0.01
 ];
-$context = new PaymentContext('Strategy\Alipay\AlipayPcExpress');
+$context = new PaymentContext('Strategy\Alipay\AlipayMobileExpress');
 $context->execute($order);
 $result = $context->getResult();
-echo $result->getRedirectUrl();
+echo base64_encode($result->getOrderString());
 exit;
 
 /**

@@ -38,6 +38,7 @@ class AlipayNotify extends AbstractPayStrategy{
 			$this->gateway->setPartner( Configuration::get( 'alipay.id' ) );
         	$this->gateway->setKey( Configuration::get( 'alipay.key' ) );
         	$this->gateway->setSellerEmail( Configuration::get( 'alipay.email' ) );
+        	$this->gateway->setAlipayPublicKey( Configuration::get( 'alipay.ali_public_key' ) );
 
 			$response = $this->gateway->completePurchase([
 	            'request_params' => $body,
