@@ -239,11 +239,13 @@ class ExpressCompletePurchaseRequest extends BasePurchaseRequest
     protected function isSignMatch()
     {
         $requestSign = $this->getRequestParam('sign');
+        $signType = strtoupper($this->getRequestParam('sign_type'));
+        $this->setSignType($signType);
 
         $queryString = http_build_query($this->getParamsToSign());
         $queryString = urldecode($queryString);
 
-        $signType = strtoupper($this->getSignType());
+        // $signType = strtoupper($this->getSignType());
 
         if ($signType == 'MD5') {
             return $requestSign === md5($queryString . $this->getKey());

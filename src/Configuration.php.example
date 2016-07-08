@@ -16,7 +16,6 @@ class Configuration{
 		'alipay.key' 			=> '',
 		'alipay.email' 			=> '',
 		'alipay.private_key'	=> '',
-		'alipay.private_key'	=> '',
 		'alipay.ali_public_key' => ''
 	];
 
