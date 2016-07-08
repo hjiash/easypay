@@ -161,8 +161,8 @@ $context->execute($body);
 try{
     $result = $context->getResult();
     
-    // $result->getRequest()->getRequestParams('trade_no');
-    // $result->getRequest()->getRequestParams('out_trade_no');
+    // $result->getRequest()->getRequestParam('trade_no');
+    // $result->getRequest()->getRequestParam('out_trade_no');
         
     $this->success();
 }catch(Exception $e){
