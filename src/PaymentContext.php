@@ -15,7 +15,7 @@ class PaymentContext{
 
 	public function execute(){
 		$args = func_get_args();
-
+		// var_dump($args);exit;
 		call_user_func_array([$this->strategy, 'execute'], $args);
 	}
 

@@ -41,7 +41,8 @@ function getClientIp() {
 // $context = new PaymentContext('Strategy\WechatPay\WechatUnifiedPay');
 // $context->execute($order);
 // $result = $context->getResult();
-// $result->getCodeUrl();
+// echo $result->getCodeUrl();
+// exit;
 
 /**
  * 微信公众号内支付
@@ -65,18 +66,21 @@ function getClientIp() {
  * 微信APP支付
  * @var [type]
  */
-// $order = [
-//  'body' => '商品描述',
-//  'detail' => '商品详情',
-//  'out_trade_no' => createOrderNumber(),
-//  'total_fee' => 1,
-//  'spbill_create_ip' => getClientIp(),
-//  'notify_url' => 'http://test.com',
-//  'openid' => 'openid'
-// ];
-// $context = new PaymentContext('Strategy\WechatPay\WechatAppPay');
-// $context->execute($order);
-// $result = $context->getResult();
+$order = [
+ 'body' => '国枫保镖-商品描述',
+ 'detail' => '商品详情',
+ 'out_trade_no' => createOrderNumber(),
+ 'total_fee' => 1,
+ 'spbill_create_ip' => getClientIp(),
+ 'notify_url' => 'http://test.com',
+ // 'openid' => 'openid'
+];
+$context = new PaymentContext('Strategy\WechatPay\WechatAppPay');
+// var_dump($order);exit;
+$context->execute($order);
+$result = $context->getResult();
+echo json_encode($result->createAppPaymentPackage());
+exit;
 
 
 /**

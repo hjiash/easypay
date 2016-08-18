@@ -70,4 +70,25 @@ class UnifiedOrderResponse extends BaseAbstractResponse{
 
         return $params;
     }
+
+    public function createAppPaymentPackage(){
+        if ( !$this->isResultSuccessful() ){
+            
+            throw new InvalidResponseException( 'Could not create app payment package from invalid response.' ); 
+        }
+        
+        $params = [
+            'appid' => $this->getAppId(),
+            'partnerid' => $this->getMchId(),
+            'prepayid' => $this->getPrepayId(),
+            'package' => 'Sign=WXPay',
+            'noncestr' => $this->getNonceStr(),
+            'timestamp' => (string)time()
+        ];
+
+        $params['sign'] = $this->getParamsSignature( $params, $this->request->getKey() );
+
+        return $params;
+    }
+
 }

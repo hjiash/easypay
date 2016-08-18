@@ -10,29 +10,29 @@ use ChengFang\EasyPay\PaymentContext;
 use \ChengFang\EasyPay\Traits\AlipayNotify;
 
 $body = [
-    'discount' => "0.00",
-    'payment_type' => "1",
-    'subject' => '国枫服务',
-    "trade_no" => "2016070821001004510255999566",
-    "buyer_email" => "hjiasheng@gmail.com",
-    "gmt_create" => "2016-07-08 15:25:22",
+    "discount" => "0.00",
+    "payment_type" => "1",
+    "subject" => "国枫服务",
+    "trade_no" => "2016070821001004790257969793",
+    "buyer_email" => "qjaviavi@126.com",
+    "gmt_create" => "2016-07-08 18:29:19",
     "notify_type" => "trade_status_sync",
     "quantity" => "1",
-    "out_trade_no" => "201607081525132612",
+    "out_trade_no" => "201607081636018187",
     "seller_id" => "2088421354060067",
-    "notify_time" => "2016-07-08 15:25:22",
+    "notify_time" => "2016-07-08 18:29:20",
     "body" => "国枫服务",
     "trade_status" => "TRADE_SUCCESS",
     "is_total_fee_adjust" => "N",
     "total_fee" => "0.01",
-    "gmt_payment" => "2016-07-08 15:25:22",
+    "gmt_payment" => "2016-07-08 18:29:20",
     "seller_email" => "jiakao@zerioi.com",
     "price" => "0.01",
-    "buyer_id" => "2088502698118514",
-    "notify_id" => "21e13942638d28221ef16a59f932292jxq",
+    "buyer_id" => "2088502781002797",
+    "notify_id" => "449075188c6291ee85e53e82d185fb2m3i",
     "use_coupon" => "N",
     "sign_type" => "RSA",
-    "sign" => "LfAzL5nNDxcCn0d5vwZc3NDer9KTabGddFbPcr6Jq7dWnQ9TgvddkX4rZasPOr7Bw5xg+XOifHu5+HCe8aH88PtMcLR8ZTkxZpWGOwaijoWuSgfbOJOR5Nog3sXv550sEuxwUgwh1FqlCTenp5yUUjnu4FRu+OOXxhTWUW+Xsqw="
+    "sign" => "Ss0Y3LZKoN9TTTMe094KeMOOMQQlQ/8/SfVseKqL9VngjLybkxBQ/TFwgPTgUfw4y3CMxtbtOi1CO/BHJ6IFB4WLPEQFYJYSDNEflDVwGKdvyP/u+pa4YkmJReSUXA0b3zvdaK/EjcTQWpQP9pNcreWcYF7wXH5lSui18UD6854="
 ];
 
 $context = new PaymentContext('Strategy\Alipay\AlipayNotify');
